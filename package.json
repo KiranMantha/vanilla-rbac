@@ -1,0 +1,45 @@
+{
+  "name": "vanilla-rbac",
+  "version": "1.0.0",
+  "description": "A framework agnostic typescript based role based access control",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "type": "module",
+  "sideEffects": false,
+  "files": [
+    "dist/**/*"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "node": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "types": "./dist/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build:types": "rimraf dist && tsc",
+    "build": "npm run build:types && vite build",
+    "patch-update": "npm version patch",
+    "lint": "eslint \"{src,test}/**/*.{ts, tsx}\" --fix",
+    "tag": "git push --follow-tags",
+    "release-tag": "npm run patch-update && npm run tag",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Kiran Mantha",
+  "license": "MIT",
+  "devDependencies": {
+    "@eslint/js": "^9.2.0",
+    "eslint": "^9.2.0",
+    "globals": "^15.2.0",
+    "typescript": "^5.4.5",
+    "typescript-eslint": "^7.9.0",
+    "vite": "^5.2.11",
+    "vite-plugin-compression": "^0.5.1"
+  }
+}
