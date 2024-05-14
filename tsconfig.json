@@ -16,5 +16,5 @@
     "esModuleInterop": true,
     "noEmitOnError": true
   },
-  "include": ["src"]
+  "exclude": ["dist/**/*", "vite.config.js"]
 }

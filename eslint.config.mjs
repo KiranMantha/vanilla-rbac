@@ -12,7 +12,7 @@ export default [
         project: ['./tsconfig.json']
       }
     },
-    ignores: ['dist/**/*.js', 'eslint.config.mjs', 'vite.config.js'],
+    ignores: ['dist/*', 'eslint.config.mjs', 'vite.config.js'],
     rules: {
       'no-unused-vars': 'error',
       'prefer-const': ['error'],
