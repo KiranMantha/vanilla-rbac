@@ -7,15 +7,17 @@ const registerComponent = (checkPermission: (permission: string, data: Record<st
       }
 
       connectedCallback() {
-        const performOp = this.dataset.perform;
-        const allowedSlot = this.querySelector('[slot="allowed"]');
-        const notAllowedSlot = this.querySelector('[slot="notallowed"]');
-        const hasPermission = checkPermission(performOp, this.dataset);
-        if (hasPermission) {
-          notAllowedSlot?.remove();
-        } else if (notAllowedSlot) {
-          allowedSlot?.remove();
-        }
+        setTimeout(() => {
+          const performOp = this.dataset.perform;
+          const allowedSlot = this.querySelector('[slot="allowed"]');
+          const notAllowedSlot = this.querySelector('[slot="notallowed"]');
+          const hasPermission = checkPermission(performOp, this.dataset);
+          if (hasPermission) {
+            notAllowedSlot?.remove();
+          } else if (notAllowedSlot) {
+            allowedSlot?.remove();
+          }
+        }, 0);
       }
     }
   );

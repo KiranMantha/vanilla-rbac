@@ -6,8 +6,10 @@ const u = (n) => {
         super();
       }
       connectedCallback() {
-        const o = this.dataset.perform, s = this.querySelector('[slot="allowed"]'), r = this.querySelector('[slot="notallowed"]');
-        n(o, this.dataset) ? r == null || r.remove() : r && (s == null || s.remove());
+        setTimeout(() => {
+          const o = this.dataset.perform, s = this.querySelector('[slot="allowed"]'), r = this.querySelector('[slot="notallowed"]');
+          n(o, this.dataset) ? r == null || r.remove() : r && (s == null || s.remove());
+        }, 0);
       }
     }
   );

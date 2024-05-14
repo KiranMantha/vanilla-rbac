@@ -62,3 +62,9 @@ setupRBAC({
   <div slot="notallowed">access denied</div>
 </rbac-comp>
 ```
+
+## Live Examples:
+
+- [Angular](https://stackblitz.com/edit/stackblitz-starters-fzt5qo?file=src%2Fmain.ts)
+- [React](https://stackblitz.com/edit/vitejs-vite-fjd98i?file=src%2FApp.jsx)
+- [Vue](https://stackblitz.com/edit/vitejs-vite-zgquej?file=src%2FApp.vue)
