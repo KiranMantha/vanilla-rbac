@@ -22,13 +22,12 @@
     "access": "public"
   },
   "scripts": {
-    "build:types": "rimraf dist && tsc",
+    "build:types": "tsc",
     "build": "npm run build:types && vite build",
     "patch-update": "npm version patch",
     "lint": "eslint \"{src,test}/**/*.{ts, tsx}\" --fix",
     "tag": "git push --follow-tags",
-    "release-tag": "npm run patch-update && npm run tag",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "release-tag": "npm run patch-update && npm run tag"
   },
   "keywords": [],
   "author": "Kiran Mantha",
