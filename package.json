@@ -1,7 +1,7 @@
 {
   "name": "vanilla-rbac",
   "version": "1.0.2",
-  "description": "A framework agnostic typescript based role based access control",
+  "description": "A framework agnostic type-safe role-base access control",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "type": "module",
@@ -29,8 +29,20 @@
     "tag": "git push --follow-tags",
     "release-tag": "npm run patch-update && npm run tag"
   },
-  "keywords": [],
+  "keywords": [
+    "rbac",
+    "role-based access control",
+    "role based access control"
+  ],
   "author": "Kiran Mantha",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KiranMantha/vanilla-rbac.git"
+  },
+  "bugs": {
+    "url": "https://github.com/KiranMantha/vanilla-rbac/issues"
+  },
+  "homepage": "https://github.com/KiranMantha/vanilla-rbac#readme",
   "license": "MIT",
   "devDependencies": {
     "@eslint/js": "^9.2.0",

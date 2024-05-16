@@ -14,19 +14,19 @@ const u = (n) => {
     }
   );
 };
-let i = !1;
+let c = !1;
 const a = ({ user: n, userRole: o, roles: s }) => {
-  !i && u((t, c = {}) => {
+  !c && u((t, i) => {
     const e = s[o];
-    switch (typeof e) {
-      case "string":
+    switch (!0) {
+      case typeof e == "string":
         return e === "*" ? !0 : e === t;
-      case "object":
-        return Array.isArray(e) ? e.includes(t) : "others" in e ? e.others.includes(t) : typeof e[t] == "function" ? e[t](n, c) : !1;
-      case "function":
-        return e(n, c);
+      case Array.isArray(e):
+        return e.includes(t);
+      case typeof e == "object":
+        return e[t] && typeof e[t] == "function" ? e[t](n, i) : "others" in e ? e.others.includes(t) : !1;
     }
-  }), i = !0;
+  }), c = !0;
 };
 export {
   a as setupRBAC

@@ -1,2 +1,2 @@
-declare const registerComponent: (checkPermission: (permission: string, data: Record<string, string>) => boolean) => void;
+declare const registerComponent: (checkPermission: (permission: string, data: DOMStringMap) => boolean) => void;
 export { registerComponent };

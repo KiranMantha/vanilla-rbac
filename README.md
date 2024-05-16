@@ -10,9 +10,9 @@
 
 # vanilla-rbac
 
-A framework agnostic typescript based role based access control library.
+A framework agnostic type-safe role-base access control library.
 
-## Usage
+## Getting Started
 
 Vanilla RBAC is a < 1kb type-safe library that provides role-based access control to any frontend framework. It comprises of a `setupRBAC` function and a webcomponent named `rback-comp`.
 
@@ -35,31 +35,51 @@ Vanilla RBAC is a < 1kb type-safe library that provides role-based access contro
 </script>
 ```
 
-### Steps
+### Usage
 
-- In your project entry file, import `setupRBAC` and call it as below:
+- In your project entry file, import `setupRBAC` and use it as below:
 
 ```typescript
 import { setupRBAC } from 'vanilla-rbac';
 
+/**
+ * This setup function will register the user details, user role and all possible roles with associated permissions
+ * This will also register a webcomponent named `rbac-comp` which is used to control user interactions based on permission and role
+ * Call this function after the system fetched user details and all possible roles with permissions
+ */
 setupRBAC({
-  // logged in user details. type object.
+  /**
+   * logged in user details. type object.
+   */
   user: {},
-  // role of loggedin user. type a string
+  /**
+   * role of loggedin user. type string
+   */
   userRole: 'lead',
-  // a collection of roles and respective permissions
+  /**
+   * roles is an object with role as key and permissions as value
+   * permissions can be a string or a list of strings or an object
+   * any role with '*' as permission defines that provided role is entitled to do any operation
+   */
   roles: {
-    // permissions can be a sitring or a list of strings or an object or a function
-    // * defines that provided role is entitled to do any operation
     lead: '*',
     seniormember: ['add:post', 'edit:post', 'view:posts'],
     juniormember: {
-      // others is a predefined key that segregates permissions that do not depend on any logic
+      /**
+       * others is a predefined key that segregates permissions that do not depend on any logic
+       */
       others: ['add:post'],
-      // user is the loggedin user details and data is the list of data-* that passed to rbac-comp
-      // data is the HTML Dataset
+      /**
+       * if provided permission not found in others, then it will be treated as key of object and execute it
+       * @param {object} user is the loggedin user details
+       * @param {DOMStringMap} data is the HTML Dataset which is the list of data-* that passed to rbac-comp
+       */
       'edit:post': (user, data) => {
-        return user.id === data.postId;
+        /**
+         * remember: data is the HTMLDataset that gives all the data-* attributes passed to the `rbac-comp`
+         * more details: https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset
+         */
+        return user.id === data.postOwnerId;
       }
     }
   }
@@ -71,7 +91,7 @@ setupRBAC({
 ## Example 1: controlling specific operations
 
 ```html
-<rbac-comp data-perform="edit:post" data-post-id="123">
+<rbac-comp data-perform="edit:post" data-post-owner-id="123">
   <button slot="allowed" onclick='alert("i can edit")'>Edit</button>
   <span slot="notallowed">access denied</span>
 </rbac-comp>
@@ -80,19 +100,22 @@ setupRBAC({
 ## Example 2: controlling specific pages
 
 ```html
-// localhost/posts
+<!-- page: localhost/posts -->
 <rbac-comp data-perform="view:posts">
   <div slot="allowed">
+    <!-- display all posts within the page -->
     <ul>
       <li>Post 1</li>
       <li>Post 2</li>
     </ul>
+    <!-- or -->
+    <your-posts-component></your-posts-component>
   </div>
-  <div slot="notallowed">access denied</div>
+  <div slot="notallowed">
+    <access-denied-component></access-denied-component>
+  </div>
 </rbac-comp>
 ```
-
-> Note: `setupRBAC` can also be called upon success of api response to fetch user details.
 
 ## Live Examples:
 

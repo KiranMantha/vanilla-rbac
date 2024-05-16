@@ -1,4 +1,4 @@
-type PermissionFn<T> = (user: T, data: Record<string, string>) => boolean;
+type PermissionFn<T> = (user: T, data: DOMStringMap) => boolean;
 type Permissions<T> = string | string[] | {
     [key: string]: string[] | boolean | PermissionFn<T>;
 };

@@ -1,4 +1,4 @@
-const registerComponent = (checkPermission: (permission: string, data: Record<string, string>) => boolean) => {
+const registerComponent = (checkPermission: (permission: string, data: DOMStringMap) => boolean) => {
   window.customElements.define(
     'rbac-comp',
     class extends HTMLElement {

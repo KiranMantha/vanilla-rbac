@@ -1,6 +1,6 @@
 import { registerComponent } from './rbac.component';
 
-type PermissionFn<T> = (user: T, data: Record<string, string>) => boolean;
+type PermissionFn<T> = (user: T, data: DOMStringMap) => boolean;
 type Permissions<T> = string | string[] | { [key: string]: string[] | boolean | PermissionFn<T> };
 
 type RBACSetupProperties<T> = {
@@ -12,29 +12,26 @@ type RBACSetupProperties<T> = {
 let isComponentInitialised = false;
 
 const setupRBAC = <T>({ user, userRole, roles }: RBACSetupProperties<T>) => {
-  const checkPermission = (permission: string, data: Record<string, string> = {}): boolean => {
+  const checkPermission = (permission: string, data: DOMStringMap): boolean => {
     const userPermissions = roles[userRole];
-    switch (typeof userPermissions) {
-      case 'string': {
+    switch (true) {
+      case typeof userPermissions === 'string': {
         if (userPermissions === '*') {
           return true;
         }
         return userPermissions === permission;
       }
-      case 'object': {
-        if (Array.isArray(userPermissions)) {
-          return userPermissions.includes(permission);
-        } else {
-          if ('others' in (userPermissions as object)) {
-            return ((userPermissions as object)['others'] as string[]).includes(permission);
-          } else if (typeof userPermissions[permission] === 'function') {
-            return (userPermissions[permission] as PermissionFn<T>)(user, data);
-          }
+      case Array.isArray(userPermissions): {
+        return userPermissions.includes(permission);
+      }
+      case typeof userPermissions === 'object': {
+        if (userPermissions[permission] && typeof userPermissions[permission] === 'function') {
+          return (userPermissions[permission] as PermissionFn<T>)(user, data);
+        }
+        if ('others' in (userPermissions as object)) {
+          return ((userPermissions as object)['others'] as string[]).includes(permission);
         }
         return false;
-      }
-      case 'function': {
-        return (userPermissions as PermissionFn<T>)(user, data);
       }
     }
   };
