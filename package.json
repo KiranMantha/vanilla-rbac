@@ -1,6 +1,6 @@
 {
   "name": "vanilla-rbac",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A framework agnostic type-safe role-base access control",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
